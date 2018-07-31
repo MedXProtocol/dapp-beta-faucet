@@ -1,0 +1,11 @@
+# You can automatically load this file using direnv: https://direnv.net/
+# or just `source .envrc`
+
+export HDWALLET_MNEMONIC="<YourHDWalletMnemonic>"
+export ROPSTEN_PROVIDER_URL=https://ropsten.infura.io/<YourInfuraAPIKey>
+export RINKEBY_PROVIDER_URL=https://rinkeby.infura.io/<YourInfuraAPIKey>
+
+export LAMBDA_CONFIG_CORS_ORIGIN="*"
+export LAMBDA_CONFIG_PRIVKEY="<YourContractOwner'sPrivateKey>"
+export LAMBDA_CONFIG_PROVIDER_URL=http://localhost:8545
+export LAMBDA_CONFIG_NETWORK_ID=1234
