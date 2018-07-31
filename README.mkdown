@@ -38,6 +38,8 @@ https://medium.com/p/fe18b3267c04
 
 # Example
 
+[(Back to top)](#table-of-contents)
+
 A simple example of our Hippocrates ĐApp's frontend showing what this can look like to your beta testers:
 
 ![Frontend Example Gif](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/images/faucet_frontend_example.gif)
