@@ -14,9 +14,6 @@ exports.handler = function (event, context, callback) {
     'Access-Control-Allow-Origin': process.env.LAMBDA_CONFIG_CORS_ORIGIN
   }
 
-  console.log('Using `config.providerUrl`: ', config.providerUrl)
-  console.log('Using: `config.networkId`', config.networkId)
-
   try {
     let ethAddress
 

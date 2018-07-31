@@ -1,0 +1,13 @@
+Copy the .envrc.example file to .envrc, and update your new .envrc with your unique environment variables.
+
+`direnv allow`
+
+`npm run test`
+
+`npm run start`
+
+`truffle compile`
+
+https://www.dropbox.com/s/bi2l9bh6zei1ms5/Screenshot%202018-07-31%2011.16.10.png?dl=0
+
+Run `npm run lambda` to compile the lambda functions and serve them at `http://localhost:9000`.

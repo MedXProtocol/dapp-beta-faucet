@@ -3,7 +3,6 @@ const abi = require('ethjs-abi')
 const SignerProvider = require('ethjs-provider-signer')
 const sign = require('ethjs-signer').sign
 const privateToAccount = require('ethjs-account').privateToAccount
-
 const betaFaucetArtifact = require("../../../build/contracts/BetaFaucet.json")
 
 function fail(msg) {
@@ -12,15 +11,26 @@ function fail(msg) {
 
 export class FaucetClient {
   constructor (config = {}) {
-    this.privateKey = config.privateKey || fail('You must configure the private key for the owner of the contract')
+    this._privateKey = config.privateKey || fail('You must configure the private key for the owner of the contract')
 
-    if (this.privateKey.length !== 66)
+    if (this._privateKey.length !== 66)
       fail('privateKey is not the correct length (May need the leading "0x")')
 
     this._providerUrl = config.providerUrl || fail('You must pass a provider URL')
     this._networkId = config.networkId || fail('You must pass a network id')
-    this._account = privateToAccount(this.privateKey)
+    this._account = privateToAccount(this._privateKey)
     this._eth = new Eth(new Eth.HttpProvider(this._providerUrl))
+
+    console.log('Using `this._privateKey`: ', this._privateKey)
+    console.log('Using `this._providerUrl`: ', this._providerUrl)
+    console.log('Using: `this._networkId`', this._networkId)
+
+    if (
+      betaFaucetArtifact === undefined
+      || betaFaucetArtifact.networks[this._networkId] === undefined
+    ) {
+      fail('could not find betaFaucetArtifact (may need to run `npm run migrate` ?)')
+    }
   }
 
   ownerAddress() {
@@ -28,8 +38,7 @@ export class FaucetClient {
   }
 
   deployedBetaFaucetContractAddress () {
-    const address = betaFaucetArtifact.networks[this._networkId].address
-    return new this._eth.contract(betaFaucetArtifact.abi).at(address)
+    return betaFaucetArtifact.networks[this._networkId].address
   }
 
   buildTransaction(data) {
@@ -74,7 +83,7 @@ export class FaucetClient {
     var data = abi.encodeMethod(method, [ethAddress, Eth.toWei('1', 'ether')])
     const tx = this.buildTransaction(data)
 
-    console.info('sendEther tx: ', tx)
+    // console.info('sendEther tx: ', tx)
 
     return this.sendTransaction(tx)
   }

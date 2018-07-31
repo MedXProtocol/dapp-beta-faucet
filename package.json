@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "./scripts/ganache.sh",
+    "lambda": "cd lambda && ./lambda-serve.sh",
     "test": "truffle compile && truffle test",
     "staging-build": "./scripts/staging-build.sh",
     "production-build": "./scripts/production-build.sh",
