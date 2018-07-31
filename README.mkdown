@@ -13,13 +13,12 @@ This is an automated Ethereum agent which signs and calls Ethereum smart contrac
 **You can read the blog post here:**
 https://medium.com/p/fe18b3267c04
 
-![Frontend Example Gif](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/images/faucet_frontend_example.gif)
-
 # Table of contents
 
+- [Example](#example)
 - [Installation](#installation)
   - [Prerequisites](#prerequisites)
-  - [Install Node/NPM Packages](#install-node-npm-packages)
+  - [Install Node/NPM Packages](#install-nodenpm-packages)
   - [Testing the Contracts](#testing-the-contracts)
   - [Environment Variables](#environment-variables)
 - [Running](#running)
@@ -29,9 +28,19 @@ https://medium.com/p/fe18b3267c04
   - [Ensure an ERC20 Token Balance](#ensuring-an-erc20-token-balance)
   - [Topping up Ether](#topping-up-ether)
   - [Run the Lambda Server](#run-the-faucet-lambda-endpoint-server)
+- [Troubleshooting](#troubleshooting)
+  - [Where is my private key?](#where-is-my-private-key)
+  - [I found a bug!](#i-found-a-bug)
+  - [What is Lambda?](#what-is-lambda)
 - [Contributing](#contributing)
 - [License](#license)
 - [Who Built This](#who-built-this)
+
+# Example
+
+A simple example of our Hippocrates ĐApp's frontend showing what this can look like to your beta testers:
+
+![Frontend Example Gif](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/images/faucet_frontend_example.gif)
 
 
 # Installation
@@ -120,7 +129,7 @@ An example of having the contract send you Ether would be to make the following 
 `http://localhost:9000/betaFaucetSendEther?ethAddress=0x95819594aeb3d6d5abb338b263e944b56dd2f195`
 
 
-## Troubleshooting
+# Troubleshooting
 
 ### Where is my private key?
 
@@ -150,10 +159,12 @@ Your contributions are always welcome! Please open a new [Issue](https://github.
 
 [(Back to top)](#table-of-contents)
 
-The Apache License January 2004. Please have a look at the [LICENSE.md](LICENSE.md) for more details.
+The Apache License January 2004. Please have a look at the [LICENSE](LICENSE) for more details.
 
 
 # Who Built This?
+
+[(Back to top)](#table-of-contents)
 
 ### OSS project provided by:
 
