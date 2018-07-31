@@ -1,13 +1,71 @@
-Copy the .envrc.example file to .envrc, and update your new .envrc with your unique environment variables.
+# ĐApp Faucet Contract & Lambda Functions
 
-`direnv allow`
+SUMMARY !
 
-`npm run test`
 
-`npm run start`
+### Prerequisites
 
-`truffle compile`
+You will need the `direnv` tool to export environment variables specifically for this project. You can get instructions on how to install it for your machine here: https://direnv.net/
 
-https://www.dropbox.com/s/bi2l9bh6zei1ms5/Screenshot%202018-07-31%2011.16.10.png?dl=0
 
-Run `npm run lambda` to compile the lambda functions and serve them at `http://localhost:9000`.
+### Setup
+
+`$ npm install`
+
+### Testing the Contracts
+
+To run the truffle tests:
+
+`$ npm run test`
+
+
+### How to Run
+
+#### Environment Variables
+
+Prior to running truffle, the ganache-cli server or the lambda functions you will need to set up your environment variables. Copy the .envrc.example file to .envrc, and update your new .envrc with your unique environment variables:
+
+1. `cp .envrc.example .envrc`
+
+2. Enter your own wallet's twelve word mnemonic in the .envrc file.
+
+3. Also, we'll leverage Infura's Ethereum Ropsten testnet node, so make sure to set up an account and paste your private key in your .envrc.
+
+4. Use `direnv allow` to export the env vars into your current terminal shell.
+
+#### Run the Ganache-CLI server:
+
+`$ npm run start`
+
+#### Compile and migrate the contracts locally:
+
+`npm run migrate`
+
+#### Run the faucet lambda endpoint server:
+
+While your Ganache-CLI server is running (via `npm run start`) open another terminal window and install the npm packages in the `lambda` dir:
+
+`$ cd lambda`
+`$ npm i`
+`$ cd ..`
+
+Then use `npm run lambda` to compile the lambda functions and start a server at `http://localhost:9000`.
+
+#### Where is my private key?
+
+After generating your mnemonic and adding it to your `.envrc` file, allowing those env vars using `direnv allow`, and running the Ganache-CLI server with `npm run start` you can find your contract owner's private key at the top of the logs:
+
+![Your Private Key IMG](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/your-private-key.png)
+
+### What is Lambda?
+
+Netlify lambda vs. AWS
+
+
+# This OSS project is by MedCredits:
+
+![MedCredits Logo](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/med_credits-logo.png)
+
+### Originally authored by:
+
+Brendan Asselstine & Chuck Bergeron
