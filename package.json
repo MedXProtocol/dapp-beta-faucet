@@ -18,13 +18,13 @@
     "babel-preset-stage-3": "^6.24.1",
     "babel-register": "^6.26.0",
     "dotenv": "^4.0.0",
+    "ethereumjs-wallet": "^0.6.0",
     "ganache-cli": "6.1.6",
     "netlify-lambda": "^0.4.0",
     "swarm-js": "^0.1.37",
-    "truffle": "^4.1.13",
     "truffle-hdwallet-provider": "0.0.3",
+    "truffle": "^4.1.13",
     "web3": "^0.20.6",
     "zeppelin-solidity": "^1.4.0"
-  },
-  "dependencies": {}
+  }
 }

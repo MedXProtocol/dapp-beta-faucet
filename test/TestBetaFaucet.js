@@ -1,5 +1,5 @@
 const expectThrow = require('./helpers/expectThrow')
-const YourToken = artifacts.require("./YourToken.sol")
+const YTKNToken = artifacts.require("./YTKNToken.sol")
 const BetaFaucetArtifact = artifacts.require('./BetaFaucet.sol')
 
 contract('BetaFaucet', function (accounts) {
@@ -7,13 +7,13 @@ contract('BetaFaucet', function (accounts) {
   let recipient2 = accounts[2]
   let recipient3 = accounts[3]
 
-  let yourTokenInstance, betaFaucetInstance
+  let ytknTokenInstance, betaFaucetInstance
 
   before(async () => {
-    yourTokenInstance = await YourToken.new()
+    ytknTokenInstance = await YTKNToken.new()
     betaFaucetInstance = await BetaFaucetArtifact.new()
 
-    await betaFaucetInstance.initialize(yourTokenInstance.address)
+    await betaFaucetInstance.initialize(ytknTokenInstance.address)
   })
 
   describe('initialize()', () => {
@@ -71,15 +71,15 @@ contract('BetaFaucet', function (accounts) {
 
   describe('sendYTKN()', () => {
     it('should work', async () => {
-      env.yourTokenInstance.mint(betaFaucetInstance.address, 3000000)
-      const betaFaucetDelegateYTKNBalance = await env.yourTokenInstance.balanceOf(betaFaucetInstance.address)
+      env.ytknTokenInstance.mint(betaFaucetInstance.address, 3000000)
+      const betaFaucetDelegateYTKNBalance = await env.ytknTokenInstance.balanceOf(betaFaucetInstance.address)
       assert.equal(betaFaucetDelegateYTKNBalance, 3000000)
 
-      const recipientsYtknBalance = await env.yourTokenInstance.balanceOf(recipient)
+      const recipientsYtknBalance = await env.ytknTokenInstance.balanceOf(recipient)
       assert.equal(recipientsYtknBalance, 0)
 
       await betaFaucetInstance.sendYTKN(recipient, 15)
-      const recipientsNewYtknBalance = await env.yourTokenInstance.balanceOf(recipient)
+      const recipientsNewYtknBalance = await env.ytknTokenInstance.balanceOf(recipient)
       assert.equal(recipientsNewYtknBalance, 15)
     })
 

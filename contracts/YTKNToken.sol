@@ -1,6 +1,6 @@
 pragma solidity ^0.4.23;
 
-import "zeppelin-solidity/contracts/token/MintableToken.sol";
+import "zeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
 
 contract YTKNToken is MintableToken {
   string public constant name = "Your Token";

@@ -2,7 +2,7 @@ pragma solidity ^0.4.23;
 
 import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./Initializable.sol";
-import "./YourToken.sol";
+import "./YTKNToken.sol";
 
 contract BetaFaucet is Ownable, Initializable {
   // Keep track of which Ethereum addresses we've sent Ether and our YTKN ERC20 token to
@@ -16,7 +16,7 @@ contract BetaFaucet is Ownable, Initializable {
   event YTKNSent(address indexed recipient, uint256 value);
 
   // A reference to your deployed token contract
-  YourToken public yourToken;
+  YTKNToken public ytknToken;
 
   // Provides a better way to do calculations via .add(), .sub(), etc.
   using SafeMath for uint256;
@@ -31,12 +31,12 @@ contract BetaFaucet is Ownable, Initializable {
 
   /**
    * @dev - Creates a new BetaFaucet contract with the given parameters
-   * @param _yourToken - the address of the previously deployed YTKN token contract
+   * @param _ytknToken - the address of the previously deployed YTKN token contract
    */
-  function initialize(YourToken _yourToken) external notInitialized {
+  function initialize(YTKNToken _ytknToken) external notInitialized {
     setInitialized();
     owner = msg.sender;
-    yourToken = _yourToken;
+    ytknToken = _ytknToken;
   }
 
   function withdrawEther() external onlyOwner {
@@ -61,11 +61,11 @@ contract BetaFaucet is Ownable, Initializable {
     require(!sentYTKNAddresses[_recipient], "recipient has already received YTKN");
     require(_amount > 0, "amount must be positive");
     require(_amount <= 500 ether, "amount must be below the upper limit");
-    require(yourToken.balanceOf(address(this)) >= _amount, "contract is out of YTKN!");
+    require(ytknToken.balanceOf(address(this)) >= _amount, "contract is out of YTKN!");
 
     sentYTKNAddresses[_recipient] = true;
     emit YTKNSent(_recipient, _amount);
 
-    yourToken.transfer(_recipient, _amount);
+    ytknToken.transfer(_recipient, _amount);
   }
 }
