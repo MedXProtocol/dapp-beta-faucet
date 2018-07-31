@@ -45,9 +45,11 @@ Prior to running truffle, the ganache-cli server or the lambda functions you wil
 
 While your Ganache-CLI server is running (via `npm run start`) open another terminal window and install the npm packages in the `lambda` dir:
 
-`$ cd lambda`
-`$ npm i`
-`$ cd ..`
+```sh
+$ cd lambda
+$ npm i
+$ cd ..
+```
 
 Then use `npm run lambda` to compile the lambda functions and start a server at `http://localhost:9000`.
 
@@ -55,7 +57,7 @@ Then use `npm run lambda` to compile the lambda functions and start a server at 
 
 After generating your mnemonic and adding it to your `.envrc` file, allowing those env vars using `direnv allow`, and running the Ganache-CLI server with `npm run start` you can find your contract owner's private key at the top of the logs:
 
-![Your Private Key IMG](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/your-private-key.png)
+![Your Private Key IMG](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/blob/master/images/your_private_key.png)
 
 ### What is Lambda?
 
@@ -64,7 +66,7 @@ Netlify lambda vs. AWS
 
 # This OSS project is by MedCredits:
 
-![MedCredits Logo](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/med_credits-logo.png)
+![MedCredits Logo](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/blob/master/images/med_credits_logo.png)
 
 ### Originally authored by:
 
