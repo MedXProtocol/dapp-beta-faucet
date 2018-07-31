@@ -19,7 +19,7 @@ contract('BetaFaucet', function (accounts) {
   describe('initialize()', () => {
     it('should not be called again', async () => {
       await expectThrow(async () => {
-        await betaFaucetInstance.initialize()
+        await betaFaucetInstance.initialize(ytknTokenInstance.address)
       })
     })
   })
@@ -71,15 +71,15 @@ contract('BetaFaucet', function (accounts) {
 
   describe('sendYTKN()', () => {
     it('should work', async () => {
-      env.ytknTokenInstance.mint(betaFaucetInstance.address, 3000000)
-      const betaFaucetDelegateYTKNBalance = await env.ytknTokenInstance.balanceOf(betaFaucetInstance.address)
+      ytknTokenInstance.mint(betaFaucetInstance.address, 3000000)
+      const betaFaucetDelegateYTKNBalance = await ytknTokenInstance.balanceOf(betaFaucetInstance.address)
       assert.equal(betaFaucetDelegateYTKNBalance, 3000000)
 
-      const recipientsYtknBalance = await env.ytknTokenInstance.balanceOf(recipient)
+      const recipientsYtknBalance = await ytknTokenInstance.balanceOf(recipient)
       assert.equal(recipientsYtknBalance, 0)
 
       await betaFaucetInstance.sendYTKN(recipient, 15)
-      const recipientsNewYtknBalance = await env.ytknTokenInstance.balanceOf(recipient)
+      const recipientsNewYtknBalance = await ytknTokenInstance.balanceOf(recipient)
       assert.equal(recipientsNewYtknBalance, 15)
     })
 
