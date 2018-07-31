@@ -1,0 +1,16 @@
+{
+  "name": "DappBetaFaucetLambdas",
+  "version": "0.0.1",
+  "scripts": {},
+  "dependencies": {
+    "ethjs": "^0.4.0",
+    "ethjs-abi": "^0.2.1",
+    "ethjs-account": "^0.1.4",
+    "ethjs-provider-signer": "^0.1.4",
+    "ethjs-signer": "^0.1.1",
+    "idempotent-babel-polyfill": "^6.26.0",
+    "netlify-lambda": "^0.4.0",
+    "node-loader": "^0.6.0",
+    "regenerator-runtime": "^0.12.0"
+  }
+}
