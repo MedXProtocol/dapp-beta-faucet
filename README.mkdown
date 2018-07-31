@@ -82,11 +82,19 @@ Prior to running truffle, the ganache-cli server or the lambda functions you wil
 
 ### Run the Ganache-CLI server:
 
+The Ganache server acts as a local test Ethereum blockchain and EVM:
+
 `$ npm run start`
 
 ### Compile and migrate the contracts locally:
 
+With the Ganache server running you can now compile and migrate (deploy) your contracts to the blockchain. To do this locally run:
+
 `npm run migrate`
+
+If you want to do this against the Ropsten or Rinkeby blockchains, use:
+
+`npm run migrate -- --network=ropsten` or `npm run migrate -- --network=rinkeby`
 
 ### Filling up your newly deployed BetaFaucet contract:
 
