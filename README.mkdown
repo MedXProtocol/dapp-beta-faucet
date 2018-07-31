@@ -13,7 +13,7 @@ This is an automated Ethereum agent which signs and calls Ethereum smart contrac
 **You can read the blog post here:**
 https://medium.com/p/fe18b3267c04
 
-![Frontend Example Gif](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/images/beta_faucet_frontend_example.gif)
+![Frontend Example Gif](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/images/faucet_frontend_example.gif)
 
 # Table of contents
 
