@@ -1,14 +1,48 @@
-# ĐApp Faucet Contract & Lambda Functions
+<h1 align="center">
+  ĐApp Faucet Contract & Lambda Functions
+  <br>
+  <a href="https://github.com/MedCredits/dapp-beta-faucet/pulls">
+    <img src="https://camo.githubusercontent.com/5be3c7fe4d80326edfa464d90dd1e796777812cf/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5052732d77656c636f6d652d627269676874677265656e2e7376673f7374796c653d736869656c6473" alt="PRs Welcome" data-canonical-src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields" style="max-width:100%;">
+  </a>
+</h1>
 
-SUMMARY !
+### What is this?
 
+This is an automated Ethereum agent which signs and calls Ethereum smart contract functions on your behalf via AJAX/XHR GET requests to lambda endpoints. We use it to remove the friction of providing Ether and ERC20 Tokens to our Beta Testers.
+
+**You can read the blog post here:**
+https://medium.com/p/fe18b3267c04
+
+![Frontend Example Gif](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/images/beta_faucet_frontend_example.gif)
+
+# Table of contents
+
+- [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Install Node/NPM Packages](#install-node-npm-packages)
+  - [Testing the Contracts](#testing-the-contracts)
+  - [Environment Variables](#environment-variables)
+- [Running](#running)
+  - [Run Ganache-CLI](#run-the-ganache-cli-server)
+  - [Compile and Migrate](#compile-and-migrate-the-contracts-locally)
+  - [Filling Up Contract](#filling-up-your-newly-deployed-betafaucet-contract)
+  - [Ensure an ERC20 Token Balance](#ensuring-an-erc20-token-balance)
+  - [Topping up Ether](#topping-up-ether)
+  - [Run the Lambda Server](#run-the-faucet-lambda-endpoint-server)
+- [Contributing](#contributing)
+- [License](#license)
+- [Who Built This](#who-built-this)
+
+
+# Installation
+
+[(Back to top)](#table-of-contents)
 
 ### Prerequisites
 
 You will need the `direnv` tool to export environment variables specifically for this project. You can get instructions on how to install it for your machine here: https://direnv.net/
 
-
-### Setup
+### Install Node/NPM Packages
 
 `$ npm install`
 
@@ -18,10 +52,7 @@ To run the truffle tests:
 
 `$ npm run test`
 
-
-### How to Run
-
-#### Environment Variables
+### Environment Variables
 
 Prior to running truffle, the ganache-cli server or the lambda functions you will need to set up your environment variables. Copy the .envrc.example file to .envrc, and update your new .envrc with your unique environment variables:
 
@@ -33,15 +64,46 @@ Prior to running truffle, the ganache-cli server or the lambda functions you wil
 
 4. Use `direnv allow` to export the env vars into your current terminal shell.
 
-#### Run the Ganache-CLI server:
+
+# Running
+
+[(Back to top)](#table-of-contents)
+
+### Run the Ganache-CLI server:
 
 `$ npm run start`
 
-#### Compile and migrate the contracts locally:
+### Compile and migrate the contracts locally:
 
 `npm run migrate`
 
-#### Run the faucet lambda endpoint server:
+### Filling up your newly deployed BetaFaucet contract:
+
+If you want your contract to send Ether, you will first need to send Ether to your newly deployed contract. Same goes for any ERC20 token, the contract will need a balance that it can then hand out.
+
+### Ensuring an ERC20 Token balance:
+
+We use `truffle console` to send Ether and mint ERC20 token to our deployed BetaFaucet instance. If your BetaFaucet was deployed to the address '0x847e024dfabcacd68cb2c2d120d195ccba4c4484', and your ERC20 token contract was deployed to '0x736768bb1acea596134f39b68bfb877286dd2220' you can mint tokens directly to the deployed BetaFaucet contract.
+
+```js
+YTKNToken.at('0x736768bb1acea596134f39b68bfb877286dd2220').then(i => ytknInstance = i)
+
+ytknInstance.mint('0x847e024dfabcacd68cb2c2d120d195ccba4c4484', '100000000000000000000000')
+```
+
+### Topping up Ether
+
+You can easily send your deployed contract Ether via MetaMask, MyCrypto or any other wallet - just as you would send Ether to any other Ethereum address.
+
+If you've deployed your contracts to Ropsten, you can get test Ropsten Ether on any of these faucets:
+
+* http://faucet.ropsten.be:3001/
+* https://faucet.metamask.io/
+* https://faucet.bitfwd.xyz/
+
+
+
+### Run the faucet lambda endpoint server:
 
 While your Ganache-CLI server is running (via `npm run start`) open another terminal window and install the npm packages in the `lambda` dir:
 
@@ -51,23 +113,56 @@ $ npm i
 $ cd ..
 ```
 
-Then use `npm run lambda` to compile the lambda functions and start a server at `http://localhost:9000`.
+Then use `npm run lambda` to compile the lambda functions and start a server at `http://localhost:9000`
 
-#### Where is my private key?
+An example of having the contract send you Ether would be to make the following GET request:
 
-After generating your mnemonic and adding it to your `.envrc` file, allowing those env vars using `direnv allow`, and running the Ganache-CLI server with `npm run start` you can find your contract owner's private key at the top of the logs:
+`http://localhost:9000/betaFaucetSendEther?ethAddress=0x95819594aeb3d6d5abb338b263e944b56dd2f195`
+
+
+## Troubleshooting
+
+### Where is my private key?
+
+After generating your mnemonic and adding it to your `.envrc` file, allowing those env vars using `direnv allow`, and running the Ganache-CLI server with `npm run start` you can find your contract owner's private key at the top of the logs, as the first private key (0):
 
 ![Finding Your Private Key](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/images/your_private_key.png)
 
+### I found a bug!
+
+Awesome! Feel free to open a new [Issue](https://github.com/MedCredits/dapp-beta-faucet/issues) or even better, a [Pull Request](https://github.com/MedCredits/dapp-beta-faucet/pulls) with the fix!
+
 ### What is Lambda?
 
-Netlify lambda vs. AWS
+From Amazon's FAQ:
+
+> AWS Lambda is a compute service that lets you run code without provisioning or managing servers. AWS Lambda executes your code only when needed and scales automatically, from a few requests per day to thousands per second. You pay only for the compute time you consume - there is no charge when your code is not running.
+
+We use Netlify's Lambda integration. Their 'Functions Free' plan provides you with up to 125,000 requests / month and up to 100 hours of run time / month. You can find more on that here: https://www.netlify.com/docs/functions/
+
+# Contributing
+
+[(Back to top)](#table-of-contents)
+
+Your contributions are always welcome! Please open a new [Issue](https://github.com/MedCredits/dapp-beta-faucet/issues) or [Pull Request](https://github.com/MedCredits/dapp-beta-faucet/pulls) to contribute. :smile:
+
+# License
+
+[(Back to top)](#table-of-contents)
+
+The Apache License January 2004. Please have a look at the [LICENSE.md](LICENSE.md) for more details.
 
 
-# This OSS project is by MedCredits:
+# Who Built This?
 
-![MedCredits Logo](https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/images/med_credits_logo.png)
+### OSS project provided by:
 
-### Originally authored by:
+<a title="visit medcredits.io" href="https://medcredits.io">
+  <img src="https://raw.githubusercontent.com/MedCredits/dapp-beta-faucet/master/images/med_credits_logo.png" width="400" alt="MedCredits Logo">
+</a>
 
-Brendan Asselstine & Chuck Bergeron
+[Visit MedCredits.io](https://medcredits.io)
+
+### Code authored by:
+
+[Brendan Asselstine](https://twitter.com/b_asselstine) & [Chuck Bergeron](https://twitter.com/chuckbergeron)
